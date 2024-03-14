@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.23;
 
-import {IP} from "@story-protocol/protocol-core/contracts/lib/IP.sol";
-import {IPAssetRegistry} from "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
-import {IPResolver} from "@story-protocol/protocol-core/contracts/resolvers/IPResolver.sol";
+import { IP } from "@story-protocol/protocol-core/contracts/lib/IP.sol";
+import { IPAssetRegistry } from "@story-protocol/protocol-core/contracts/registries/IPAssetRegistry.sol";
+import { IPResolver } from "@story-protocol/protocol-core/contracts/resolvers/IPResolver.sol";
 
 contract IPARegistrar {
     uint256 public constant MIN_ROYALTY = 10;
@@ -16,11 +16,7 @@ contract IPARegistrar {
         IP_RESOLVER = resolver;
     }
 
-    function register(
-        string memory ipName,
-        address tokenAddress,
-        uint256 tokenId
-    ) external returns (address) {
+    function register(string memory ipName, address tokenAddress, uint256 tokenId) external returns (address) {
         bytes memory metadata = abi.encode(
             IP.MetadataV1({
                 name: ipName,
@@ -30,14 +26,6 @@ contract IPARegistrar {
                 uri: ""
             })
         );
-        return
-            IPA_REGISTRY.register(
-                block.chainid,
-                tokenAddress,
-                tokenId,
-                IP_RESOLVER,
-                true,
-                metadata
-            );
+        return IPA_REGISTRY.register(block.chainid, tokenAddress, tokenId, IP_RESOLVER, true, metadata);
     }
 }
