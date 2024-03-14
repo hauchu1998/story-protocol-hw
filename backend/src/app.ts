@@ -1,7 +1,8 @@
-import cors from "cors";
+import * as cors from "cors";
 import { ethers } from "ethers";
-import express from "express";
-import winston from "winston";
+import * as express from "express";
+import { errorHandler } from "./middleware/error";
+import * as winston from "winston";
 
 // const winston = require("winston");
 const { combine, timestamp, printf, colorize, align } = winston.format;
@@ -19,6 +20,7 @@ app.use(express.json()); // or use bodyParser.json()?
 //   optionsSuccessStatus: 204,
 // };
 app.use(cors());
+app.use(errorHandler);
 
 // Set up logger
 
