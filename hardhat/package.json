@@ -6,8 +6,8 @@
   "scripts": {
     "test": "npx hardhat test",
     "compile": "npx hardhat compile",
-    "deploy": "npx hardhat ignition deploy ./ignition/modules/SP721.ts --network sepolia",
-    "deploy:verify": "npx hardhat ignition deploy ./ignition/modules/SP721.ts --network sepolia --verify"
+    "deploy": "npx hardhat ignition deploy --network sepolia",
+    "deploy:verify": "npx hardhat ignition deploy --network sepolia --verify"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",

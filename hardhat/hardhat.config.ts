@@ -20,6 +20,13 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
+    hardhat: {
+      forking: {
+        // url: `https://mainnet.infura.io/v3/${INFURA_API_KEY}`,
+        url: "https://ethereum-sepolia-rpc.publicnode.com",
+        // blockNumber: 5376300,
+      },
+    },
     sepolia: {
       url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
       accounts: [SEPOLIA_PRIVATE_KEY],
