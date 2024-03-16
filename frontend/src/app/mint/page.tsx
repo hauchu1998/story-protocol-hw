@@ -1,45 +1,55 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Switch } from "@mui/material";
 import Navbar from "@/components/navbar";
 import ImageGeneration from "@/components/imageGeneration";
 import { useMintWithUri, useMintAndRegisterIP } from "@/hook/useMintNft";
 import { useNftBalanceOf } from "@/hook/useUserData";
+import { toast } from "sonner";
+import Loading from "@/components/loading";
 
 export default function Mint() {
   const {
     hash: mintWithUriHash,
     mintWithUri,
     isLoading: isMintLoading,
+    isSuccess: isMintSuccess,
   } = useMintWithUri();
   const {
     hash: mintWithUriAndRegisterIPHash,
     mintWithUriAndRegisterIP,
     isLoading: isMintAndRegisterLoading,
+    isSuccess: isMintAndRegisterSuccess,
   } = useMintAndRegisterIP();
   const { refetchNftBalanceOf } = useNftBalanceOf();
 
-  const [imageUrl, setImageUrl] = useState<string>(
-    "https://cloudflare-ipfs.com/ipfs/QmRibyKgMy5iK2VmhgNYwdhDJBr795ji3eozk9nPYmU9oU/steamboat-willie.jpg"
-  );
+  const defaultImageUrl =
+    "https://cloudflare-ipfs.com/ipfs/QmRibyKgMy5iK2VmhgNYwdhDJBr795ji3eozk9nPYmU9oU/steamboat-willie.jpg";
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [withIp, setWithIp] = useState<boolean>(false);
 
   const handleMintNft = async () => {
     console.log("handleMintNft: ", imageUrl, withIp);
     try {
       if (withIp) {
-        mintWithUriAndRegisterIP("TestIP", imageUrl);
+        await mintWithUriAndRegisterIP("TestIP", imageUrl);
       } else {
-        mintWithUri(imageUrl);
+        await mintWithUri(imageUrl);
       }
+
+      await refetchNftBalanceOf();
     } catch (e) {
       console.error("mint nft error: ", e);
+      toast.error("failed minted");
     }
-    setImageUrl(
-      "https://cloudflare-ipfs.com/ipfs/QmRibyKgMy5iK2VmhgNYwdhDJBr795ji3eozk9nPYmU9oU/steamboat-willie.jpg"
-    );
-    refetchNftBalanceOf();
   };
+
+  useEffect(() => {
+    if ((withIp && isMintAndRegisterSuccess) || isMintSuccess) {
+      setImageUrl("");
+      toast.success("successfully minted");
+    }
+  }, [isMintAndRegisterSuccess, isMintSuccess, withIp]);
 
   return (
     <div className="flex min-h-screen flex-col items-center px-24 bg-indigo-200 pb-20">
@@ -62,6 +72,9 @@ export default function Mint() {
             >
               Mint
             </button>
+            {(isMintLoading || isMintAndRegisterLoading) && (
+              <Loading className="mt-3" />
+            )}
           </div>
         )}
       </div>

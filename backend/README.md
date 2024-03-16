@@ -1,7 +1,15 @@
-# Awesome Project Build with TypeORM
+# backend
 
-Steps to run this project:
+### TODO
 
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+- [ ] Add tests
+- [ ] fix rigistering IP with SDK.
+
+The backend use TypeORM to manage data with Postgres database. The backend is a RESTful API that allow users to register IP on Story Protocol.
+
+## Getting Started
+
+```bash
+yarn
+yarn start
+```

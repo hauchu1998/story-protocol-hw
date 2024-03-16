@@ -4,6 +4,7 @@ import { queryClientConfig } from "@/configs/queryClient";
 import { WagmiProvider } from "wagmi";
 import { wagmiConfig } from "@/configs/wagmi";
 import { Press_Start_2P } from "next/font/google";
+import { Toaster } from "@/components/sonner";
 import "./globals.css";
 
 export const pressStart2P = Press_Start_2P({
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={pressStart2P.className}>
+        <Toaster richColors />
         <WagmiProvider config={wagmiConfig}>
           <QueryClientProvider client={queryClientConfig}>
             {children}
