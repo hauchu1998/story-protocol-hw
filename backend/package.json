@@ -4,7 +4,6 @@
    "description": "",
    "type": "commonjs",
    "scripts": {
-      "dev": "ts-node-dev --respawn index.ts",
       "build": "tsc",
       "start": "ts-node src/index.ts",
       "typeorm:init": "typeorm init",
@@ -15,6 +14,7 @@
       "seeding": "ts-node src/seeding.ts"
    },
    "dependencies": {
+      "@story-protocol/core-sdk": "^0.0.1-beta-rc.10",
       "@types/sinon": "^17.0.3",
       "@types/supertest": "^6.0.2",
       "axios": "^1.6.5",
@@ -38,6 +38,7 @@
       "typeorm-extension": "^3.5.0",
       "typeorm-seeding": "^1.6.1",
       "uuid": "^9.0.1",
+      "viem": "2.x",
       "winston": "^3.11.0"
    },
    "devDependencies": {
