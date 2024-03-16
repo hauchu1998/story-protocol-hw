@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
+    "@story-protocol/core-sdk": "^0.0.1-beta-rc.10",
     "@tanstack/react-query": "^5.21.4",
     "ethers": "^6.11.1",
     "ipfs-http-client": "^60.0.1",

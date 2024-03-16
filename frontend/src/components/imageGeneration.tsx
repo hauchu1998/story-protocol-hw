@@ -1,5 +1,5 @@
 "use client";
-import { generateImage } from "@/apis/generateImage";
+import { generateImage } from "@/api/generateImage";
 import Image from "next/image";
 import { useState, Dispatch, SetStateAction } from "react";
 import Loading from "./loading";
@@ -51,7 +51,7 @@ const ImageGeneration = ({
   return (
     <div className="mt-8 w-full flex flex-col items-center">
       <div className="w-full text-center">Enter your prompt</div>
-      <div>
+      <div className="mt-3">
         {options.map((option) => {
           return (
             <button
@@ -76,16 +76,16 @@ const ImageGeneration = ({
         value={prompt}
       />
       <button
-        className="mt-5 bg-indigo-500 px-3 py-1 rounded-full text-white hover:text-black"
+        className="mt-3 bg-indigo-500 px-3 py-1 rounded-full text-white hover:text-black"
         onClick={handleGenerateImage}
       >
         Generate Image
       </button>
 
       {isLoading ? (
-        <Loading className="mt-5" />
+        <Loading className="mt-3" />
       ) : imageUrl ? (
-        <div className="mt-5 flex flex-col items-center">
+        <div className="mt-3 flex flex-col items-center">
           <Image
             src={imageUrl}
             alt="generated image"
@@ -93,16 +93,16 @@ const ImageGeneration = ({
             height={500}
           />
           <Link
-            className="mt-3 text-indigo-300 hover:text-indigo-700 text-xs text-center"
+            className="mt-3 text-indigo-300 hover:text-indigo-700 text-xs text-center underline"
             href={imageUrl}
           >
-            {imageUrl}
+            Image Link
           </Link>
         </div>
       ) : (
         <div></div>
       )}
-      {error && <div className="mt-5 text-red-500">{error}</div>}
+      {error && <div className="mt-3 text-red-500">{error}</div>}
     </div>
   );
 };
